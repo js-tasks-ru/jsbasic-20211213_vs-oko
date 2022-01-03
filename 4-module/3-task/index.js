@@ -13,7 +13,8 @@ function highlight(table) {
             row.classList.add("unavailable");
           }
         } else {
-          row.setAttribute('hidden', '{ display: none }');
+          // row.setAttribute('hidden', '{ display: none }');
+          row.hidden = true;//так выглядит лучше
         }
         break;
       case 2:
