@@ -7,7 +7,8 @@ function initCarousel() {
   let carousel = document.querySelector('.carousel__inner');
   let slideWidth = document.querySelector('.carousel__slide').offsetWidth;
   let posSlide = 0;
-  let slideCounter = 0;
+  let slideCounter = 1;
+  let slideTotal = document.querySelectorAll('.carousel__slide').length;
   buttonLeft.style.display = 'none';
   function moveRight() {
     posSlide -= slideWidth;
@@ -16,7 +17,7 @@ function initCarousel() {
       buttonLeft.style.display = '';
     }
     carousel.style.transform = 'translateX(' + posSlide + 'px)';
-    buttonRight.style.display = slideCounter > 2 ? 'none' : '';
+    buttonRight.style.display = slideCounter < slideTotal ? '' : 'none';
   }
   function moveLeft() {
     posSlide += slideWidth;
@@ -25,6 +26,6 @@ function initCarousel() {
       buttonRight.style.display = '';
     }
     carousel.style.transform = 'translateX(' + posSlide + 'px)';
-    buttonLeft.style.display = !slideCounter ? 'none' : '';
+    buttonLeft.style.display = slideCounter > 1 ? '' : 'none';
   }
 }
