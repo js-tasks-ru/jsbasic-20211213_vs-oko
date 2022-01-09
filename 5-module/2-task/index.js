@@ -4,6 +4,6 @@ function toggleText() {
   let textId = document.getElementById('text');
   button.addEventListener('click', reNewEl);
   function reNewEl() {
-    return textId.hidden ? textId.hidden = false : textId.hidden = true;
+    textId.hidden = !textId.hidden;
   }
 }
