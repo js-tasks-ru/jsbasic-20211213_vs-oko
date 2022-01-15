@@ -46,13 +46,11 @@ export default class Carousel {
     if (event.target.closest('.carousel__arrow')) {
       this.slideTotal = this.slides.length;
       this.slideWidth = this.carouselInner.offsetWidth;
-      switch (event.target.closest('.carousel__arrow').classList.contains("carousel__arrow_right")) {
-      case true:
+      let el = event.target.closest('.carousel__arrow').classList.contains("carousel__arrow_right");
+      if (el) {
         this.moveRight();
-        break;
-      case false:
+      } else {
         this.moveLeft();
-        break;
       }
     }
 
