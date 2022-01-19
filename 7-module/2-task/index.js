@@ -27,13 +27,13 @@ export default class Modal {
     this.header.append(this.titleTag);
   }
   open() {
-    document.body.append(this.modal);
     document.body.classList.add('is-modal-open');
+    document.body.append(this.modal);
     document.addEventListener('keydown', this.keyDownFuncLink);
     this.buttonClose.addEventListener('click', () => this.close());
   }
   close() {
-    document.body.querySelector('.modal').remove();
+    this.modal.remove();
     document.body.classList.remove('is-modal-open');
     document.removeEventListener('keydown', this.keyDownFuncLink);
 
