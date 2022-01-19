@@ -35,8 +35,6 @@ export default class Modal {
   close() {
     this.modal.remove();
     document.body.classList.remove('is-modal-open');
-    document.removeEventListener('keydown', this.keyDownFuncLink);
-
   }
   setTitle(title) {
     this.titleTag.textContent = title;
@@ -49,6 +47,7 @@ export default class Modal {
   }
   keyDownCheck(event) {
     if (event.code === 'Escape') {
+      document.removeEventListener('keydown', this.keyDownFuncLink);
       this.close();
     }
   }
