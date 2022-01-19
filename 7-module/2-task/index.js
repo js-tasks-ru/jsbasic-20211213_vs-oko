@@ -27,12 +27,10 @@ export default class Modal {
     this.header.append(this.titleTag);
   }
   open() {
-    document.body.querySelector('.container').append(this.modal);
+    document.body.append(this.modal);
     document.body.classList.add('is-modal-open');
     document.addEventListener('keydown', this.keyDownFuncLink);
     this.buttonClose.addEventListener('click', () => this.close());
-
-
   }
   close() {
     document.body.querySelector('.modal').remove();
@@ -41,7 +39,7 @@ export default class Modal {
 
   }
   setTitle(title) {
-    this.titleTag.append(title);
+    this.titleTag.textContent = title;
   }
   setBody(bodyElem) {
     for (let child of this.body.children) {
