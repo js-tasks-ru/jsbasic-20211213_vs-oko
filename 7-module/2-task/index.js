@@ -9,8 +9,7 @@ export default class Modal {
     this.inner.className = 'modal__inner';
     this.modal.append(this.inner);
     this.renderModal();
-    this.buttonClose.addEventListener('click', () => this.close());
-    document.addEventListener('keydown', () => this.keyDownCheck(event));
+    this.keyDownFuncLink = () => this.keyDownCheck(event);
   }
   renderModal() {
     this.header = document.createElement('div');
@@ -30,10 +29,16 @@ export default class Modal {
   open() {
     document.body.querySelector('.container').append(this.modal);
     document.body.classList.add('is-modal-open');
+    document.addEventListener('keydown', this.keyDownFuncLink);
+    this.buttonClose.addEventListener('click', () => this.close());
+
+
   }
   close() {
     document.body.querySelector('.modal').remove();
     document.body.classList.remove('is-modal-open');
+    document.removeEventListener('keydown', this.keyDownFuncLink);
+
   }
   setTitle(title) {
     this.titleTag.append(title);
@@ -47,7 +52,6 @@ export default class Modal {
   keyDownCheck(event) {
     if (event.code === 'Escape') {
       this.close();
-      document.removeEventListener('keydown', () => this.keyDownCheck(event));
     }
   }
 }
