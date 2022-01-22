@@ -6,7 +6,6 @@ export default class StepSlider {
     this.elem.className = 'slider';
     this.sliderThumb = document.createElement('div');
     this.sliderThumb.className = 'slider__thumb';
-    //this.thumbPos = 0;
     this.sliderProgress = document.createElement('div');
     this.sliderProgress.className = 'slider__progress';
     this.sliderBody = document.createElement('div');
@@ -38,35 +37,15 @@ export default class StepSlider {
     }
   }
   sliderCords(event) {
-
-    /*    let oneStep = this.elem.offsetWidth / (this.steps - 1);
-    let left = this.elem.getBoundingClientRect().left;
-    let findStep;
-    for (let i = this.value; i < this.steps; i++) {
-      let compareStep1 = oneStep * i + left;
-      let compareStep2 = oneStep * (i + 1) + left;
-      if (cordX >= compareStep1 && cordX <= compareStep2) {
-        let cordA = cordX - compareStep1;
-        let coedB = compareStep2 - cordX;
-        if (cordA !== coedB) {
-          findStep = coedB > cordA ? i : i + 1;
-        } else {
-          findStep = i;
-        }
-      }
-    }
-    return findStep;*/
     let left = event.clientX - this.elem.getBoundingClientRect().left;
     let leftRelative = left / this.elem.offsetWidth;
 
     if (leftRelative < 0) {
       leftRelative = 0;
     }
-
     if (leftRelative > 1) {
       leftRelative = 1;
     }
-
     return leftRelative;
   }
   sliderDragDropInit (cordX) {
@@ -78,36 +57,23 @@ export default class StepSlider {
 
   }
   sliderMove(event) {
-    //console.log( event.type);
     let valuePercents;
+    let approximateValue;
+    let valuePos;
+    let segments = this.steps - 1;
     if (event.type === 'pointermove') {
       this.elem.classList.add('slider_dragging');
-/*      let valuePercents = Math.round((event.clientX - this.elem.getBoundingClientRect().left) / this.elem.offsetWidth * 100);
-      valuePercents = valuePercents > 100 ? 100 : valuePercents;
-      valuePercents = valuePercents < 0 ? 0 : valuePercents;
-      //console.log(valuePercents);*/
-      let valuePos = this.sliderCords(event);
-      let segments = this.steps - 1;
-      let approximateValue = valuePos * segments;
+      valuePos = this.sliderCords(event);
       valuePercents = valuePos * 100;
-/*      this.sliderThumb.style.left = valuePos * 100 + '%';
-      this.sliderProgress.style.width = valuePos * 100 + '%';*/
-      this.value = Math.round(approximateValue);
     }
     if (event.type === 'pointerup') {
-      //console.log( event.type);
       this.elem.classList.remove('slider_dragging');
       document.removeEventListener('pointermove', this.SliderMoveLink);
-      let valuePos = this.sliderCords(event);
-      let segments = this.steps - 1;
-      let approximateValue = valuePos * segments;
-      this.value = Math.round(approximateValue);
-/*
-      valuePercents = valuePercents > 100 ? 100 : valuePercents;
-      valuePercents = valuePercents < 0 ? 0 : valuePercents;
-*/
+      valuePos = this.sliderCords(event);
       valuePercents = this.value / segments * 100;
     }
+    approximateValue = valuePos * segments;
+    this.value = Math.round(approximateValue);
     this.sliderThumb.style.left = valuePercents + '%';
     this.sliderProgress.style.width = valuePercents + '%';
     this.sliderClassInner();
