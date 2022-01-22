@@ -48,7 +48,7 @@ export default class StepSlider {
     }
     return leftRelative;
   }
-  sliderDragDropInit (cordX) {
+  sliderDragDropInit () {
     this.SliderMoveLink = () => this.sliderMove(event);
     document.addEventListener('pointermove', this.SliderMoveLink);
     this.sliderThumb.ondragstart = () => false;
