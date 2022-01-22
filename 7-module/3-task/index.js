@@ -60,8 +60,9 @@ export default class StepSlider {
   sliderMove(event) {
     let findStep = this.sliderCords(event.clientX);
     this.thumbPos = findStep;
-    this.sliderThumb.style.left = findStep * Math.round((100 / (this.steps - this.value - 1))) + '%';
-    this.sliderProgress.style.width = findStep * Math.round((100 / (this.steps - this.value - 1))) + '%';
+    let valuePercents = findStep / (this.steps - 1) * 100;
+    this.sliderThumb.style.left = valuePercents + '%';
+    this.sliderProgress.style.width = valuePercents + '%';
     this.sliderClassInner();
     this.customEventInit();
   }
