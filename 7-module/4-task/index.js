@@ -14,6 +14,7 @@ export default class StepSlider {
     this.sliderThumb.style.left = this.value + "%";
     this.sliderProgress.style.width = this.value + "%";
     this.sliderStepsRender();
+    this.elem.addEventListener('click', () => this.sliderMove(event));
     this.sliderThumb.addEventListener('pointerdown', () => this.sliderDragDropInit(event));
   }
   sliderStepsRender() {
@@ -61,19 +62,24 @@ export default class StepSlider {
     let approximateValue;
     let valuePos;
     let segments = this.steps - 1;
-    if (event.type === 'pointermove') {
-      this.elem.classList.add('slider_dragging');
-      valuePos = this.sliderCords(event);
-      valuePercents = valuePos * 100;
-    }
-    if (event.type === 'pointerup') {
-      this.elem.classList.remove('slider_dragging');
-      document.removeEventListener('pointermove', this.SliderMoveLink);
-      valuePos = this.sliderCords(event);
-      valuePercents = this.value / segments * 100;
-    }
+    valuePos = this.sliderCords(event);
     approximateValue = valuePos * segments;
     this.value = Math.round(approximateValue);
+    switch (event.type) {
+    case 'click':
+      valuePos = this.sliderCords(event);
+      valuePercents = this.value / segments * 100;
+      break;
+    case 'pointermove':
+      this.elem.classList.add('slider_dragging');
+      valuePercents = valuePos * 100;
+      break;
+    case 'pointerup':
+      this.elem.classList.remove('slider_dragging');
+      document.removeEventListener('pointermove', this.SliderMoveLink);
+      valuePercents = this.value / segments * 100;
+      break;
+    }
     this.sliderThumb.style.left = valuePercents + '%';
     this.sliderProgress.style.width = valuePercents + '%';
     this.sliderClassInner();
