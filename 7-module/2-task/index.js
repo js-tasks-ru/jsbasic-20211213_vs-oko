@@ -36,7 +36,6 @@ export default class Modal {
     this.modal.remove();
     document.body.classList.remove('is-modal-open');
     document.removeEventListener('keydown', this.keyDownFuncLink);
-
   }
   setTitle(title) {
     this.titleTag.textContent = title;
