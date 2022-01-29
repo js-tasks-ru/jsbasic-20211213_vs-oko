@@ -8,7 +8,7 @@ export default class ProductGrid {
     this.elem = createElement('<div class="products-grid">\n' +
       '<div class="products-grid__inner">\n' +
       '</div>\n' +
-      '</div>`');
+      '</div>');
     this.updateFilter(this.filters);
   }
   productGridRender(productsFiltered) {
