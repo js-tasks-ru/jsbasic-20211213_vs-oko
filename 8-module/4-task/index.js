@@ -22,7 +22,7 @@ export default class Cart {
       item.count += 1;
     } else {
       item = {
-        product: product,
+        product,
         count: 1
       };
       this.cartItems.push(item);

@@ -7,7 +7,7 @@ export default class Cart {
 
   addProduct(product) {
     // ваш код
-    if (!product)
+    if (!product)//проверка на некорректный вызов
       return;
     let item = this.cartItems.find(item => item.product === product);
 
@@ -15,7 +15,7 @@ export default class Cart {
       item.count += 1;
     } else {
       item = {
-        product: product,
+        product,
         count: 1
       };
       this.cartItems.push(item);
