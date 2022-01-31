@@ -144,7 +144,7 @@ export default class Cart {
         let productCount = this.modalClass.modal.querySelector(`[data-product-id="${item.product.id}"] .cart-counter__count`);
         productCount.textContent = item.count;
         let productPrice = this.modalClass.modal.querySelector(`[data-product-id="${item.product.id}"] .cart-product__price`);
-        productPrice.textContent = '€' + (item.product.price * item.count);
+        productPrice.textContent = '€' + (item.product.price * item.count).toFixed(2);
         this.modalClass.modal.querySelector('.cart-buttons__info-price').textContent = '€' + this.getTotalPrice().toFixed(2);
       }
       if (this.isEmpty()) {
@@ -154,7 +154,6 @@ export default class Cart {
   }
   onSubmit(event) {
     // ...ваш код
-    console.log('submit');
     event.preventDefault();
     let form = this.modalClass.modal.querySelector('.cart-form');
     let userFormData = new FormData(form);
