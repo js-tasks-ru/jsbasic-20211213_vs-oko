@@ -46,19 +46,17 @@ export default class Main {
         maxSpiciness: this.stepSlider.value,
         category: this.ribbonMenu.value
       });
-      this.stepSlider.elem.addEventListener('slider-change', (event) => this.productsGrid.updateFilter({
-        maxSpiciness: event.detail
-      }));
+      this.stepSlider.elem.addEventListener('slider-change', (event) => {
+        let value = event.detail;
+        this.productsGrid.updateFilter({maxSpiciness: value});});
       document.body.addEventListener('product-add', () => {
-        //console.log(event.detail);
         let id = event.detail;
         let productToAdd = products.find((product) => product.id === id);
-        //console.log(productToAdd);
         this.cart.addProduct(productToAdd);
       });
-      this.ribbonMenu.elem.addEventListener('ribbon-select', () => this.productsGrid.updateFilter({
-        category: event.detail
-      }));
+      this.ribbonMenu.elem.addEventListener('ribbon-select', () => {
+        let category = event.detail;
+        this.productsGrid.updateFilter({category})});
       let noNutsControl = document.getElementById('nuts-checkbox');
       noNutsControl.addEventListener('change', () => {
         this.productsGrid.updateFilter({ noNuts: event.target.checked });
