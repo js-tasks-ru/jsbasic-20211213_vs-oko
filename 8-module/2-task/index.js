@@ -28,8 +28,10 @@ export default class ProductGrid {
     if (this.filters.vegeterianOnly) {
       productsFiltered = productsFiltered.filter(elem => elem.vegeterian);
     }
-    this.filters.maxSpiciness = this.filters.maxSpiciness || 4; //при значении 0 игнорирует фильтр
-    productsFiltered = productsFiltered.filter(elem => elem.spiciness <= this.filters.maxSpiciness);
+    //this.filters.maxSpiciness = this.filters.maxSpiciness || 4; //при значении 0 игнорирует фильтр
+    if (!isNaN(+this.filters.maxSpiciness)) {
+      productsFiltered = productsFiltered.filter(elem => elem.spiciness <= this.filters.maxSpiciness);
+    }
     if (this.filters.category) {
       productsFiltered = productsFiltered.filter(elem => elem.category === this.filters.category);
     }
