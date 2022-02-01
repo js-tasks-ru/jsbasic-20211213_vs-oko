@@ -11,8 +11,8 @@ export default class StepSlider {
     this.sliderBody = document.createElement('div');
     this.sliderBody.className = 'slider__steps';
     this.elem.append(this.sliderThumb, this.sliderProgress, this.sliderBody);
-    this.sliderThumb.style.left = this.value + "%";
-    this.sliderProgress.style.width = this.value + "%";
+    this.sliderThumb.style.left = this.value / (this.steps - 1) * 100 + "%";
+    this.sliderProgress.style.width = this.value / (this.steps - 1) * 100 + "%";
     this.sliderStepsRender();
     this.elem.addEventListener('click', () => this.sliderMove(event));
     this.sliderThumb.addEventListener('pointerdown', () => this.sliderDragDropInit(event));
@@ -20,7 +20,7 @@ export default class StepSlider {
   sliderStepsRender() {
     this.sliderThumb.innerHTML += '<span class="slider__value">' + this.value + '</span>';
 
-    for (let i = this.value; i < this.steps; i++) {
+    for (let i = 0; i < this.steps; i++) {
       let span = document.createElement('span');
       this.sliderBody.append(span);
     }
@@ -77,6 +77,7 @@ export default class StepSlider {
     case 'pointerup':
       this.elem.classList.remove('slider_dragging');
       document.removeEventListener('pointermove', this.SliderMoveLink);
+      document.removeEventListener('pointerup', this.SliderMoveLink);
       valuePercents = this.value / segments * 100;
       break;
     }
