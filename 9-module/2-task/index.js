@@ -49,21 +49,21 @@ export default class Main {
       this.stepSlider.elem.addEventListener('slider-change', (event) => {
         let value = event.detail;
         this.productsGrid.updateFilter({maxSpiciness: value});});
-      document.body.addEventListener('product-add', () => {
+      document.body.addEventListener('product-add', (event) => {
         let id = event.detail;
         let productToAdd = products.find((product) => product.id === id);
         this.cart.addProduct(productToAdd);
       });
-      this.ribbonMenu.elem.addEventListener('ribbon-select', () => {
+      this.ribbonMenu.elem.addEventListener('ribbon-select', (event) => {
         let category = event.detail;
         this.productsGrid.updateFilter({category})});
       let noNutsControl = document.getElementById('nuts-checkbox');
-      noNutsControl.addEventListener('change', () => {
+      noNutsControl.addEventListener('change', (event) => {
         this.productsGrid.updateFilter({ noNuts: event.target.checked });
       });
 
       let vegetarianOnlyControl = document.getElementById('vegeterian-checkbox');
-      vegetarianOnlyControl.addEventListener('change', () => {
+      vegetarianOnlyControl.addEventListener('change', (event) => {
         this.productsGrid.updateFilter({ vegeterianOnly: event.target.checked });
       });
     } else {
